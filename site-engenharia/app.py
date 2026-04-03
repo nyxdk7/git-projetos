@@ -34,7 +34,7 @@ def login():
     else:
         return render_template('index.html')
     
-@app.route('/dashboard')
+@app.route('/index')
 @login_required
 def dashboard():
     return render_template('menu-inicial.html')
