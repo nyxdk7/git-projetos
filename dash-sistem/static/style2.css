@@ -1,0 +1,42 @@
+body {
+    background-image: url(/static/images/pavimento.jpg);
+    background-size: cover;
+    margin: 0;
+}
+
+/*CONFIGURACAO DA BARRA DE NAVEGACAO*/
+
+.navegacao nav {
+    text-align: center;
+    background-color: rgba(255, 166, 0, 0.709);
+    padding: 18px;
+}
+
+/*REMOCAO DA DECORACAO DO TEXTO E CONFIGURACAO DE TEXTO*/
+
+.navegacao a {
+
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 24px;
+    color: white;
+    margin-left: 20px;
+    transition: 500ms;
+}
+
+.navegacao a:hover {
+
+    font-size: 32px;
+    transition: 500ms;
+}
+
+/*TEXTO DE INICIO APOS O LOGIN*/
+
+.inicio-login {
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.415);
+    padding:60px;
+}
+
