@@ -6,27 +6,23 @@
     <title>Página inicial</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
- <body>
-        <main>
+   <body>
+<div class="container-login">  
+  
+<!--TELA DE LOGIN CREDENCIAIS-->
 
-        <div class="bem-vindo">
-          <footer">
-            <h1>BEM-VINDO(a)</h1>
-             <h4>REALIZE O LOGIN ATRAVÉS DAS CREDENCIAIS ABAIXO</h4>
-          </footer>
-        
+      <div class="login-user">
+         <form method="POST" action="/login">
+          <h1>LOGIN</h1>
+           <input type="text" name="username" placeholder="usuario" required>
+           <input type="password" name="password" placeholder="senha">
+          <button type="submit">ENTRAR</button>
+         </form>
+      </div>
+    </div>  
+   </body>
+</html> 
 
-          <div class="login-user">
-            <form method="POST" action="/login">
 
-                  <input type="text" name="username" placeholder="usuario" required>
-                    <input type="password" name="password" placeholder="senha">
-                  <button type="submit">ENTRAR</button>
-            </form>
-            </div>
-        </main>
-    </div>
 
     
- </body>
-</html> 

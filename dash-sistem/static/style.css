@@ -1,74 +1,68 @@
-.bem-vindo {
+/* CORPO DO CODIGO */
 
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: rgba(128, 128, 128, 0.397);
-    padding: 18px;
-    border-radius: 8px;
-    text-align: center;
-     margin: 20px;
-     height: 20vh;
-    
-    
+body {
+    background-image: url(/static/images/pedreira.jpg);
+    background-size: cover;
+    margin: 2;
     display: flex;
-    align-items: center;
-    
+    justify-content: center;
 }
 
-.navegacao {
+/*CORPO DA TELA DE LOGIN */
 
-    background-color: gray;
-    padding: 18px;
-    color: rgb(0, 0, 0);
-    border-radius: 6px;
+.container-login {
+    background-color: rgba(255, 166, 0, 0.222);
+    border-radius: 20px;
+    height: 250px;
+    width: 900px;
+    margin: 50px;
 
-
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+    width: auto;
 }
 
-.navegacao a {
+/*INPUTS DA TELA DE LOGIN*/
 
-    text-decoration: none;
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
+.login-user {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
 }
 
-.botao1 {
-
-    padding: 8px;
-    transition: 500ms;
+.login-user input {
+    border: solid rgba(255, 255, 255, 0) 1px;
+    padding: 20px;
+    width: 300px;
+    border-radius: 30px;
+    background-color: rgb(255, 166, 0);
+    font-size: 15px;
 }
 
-.botao1:hover {
-
-    padding: 8px;
-    font-size: 22px;
-    background-color: color(from color srgb r g b);
-    transition: 500ms;
+.login-user input:focus {
+    background-color: #ffffff93;
+    transition: 12ms;
+    border: solid rgba(255, 255, 255, 0) 1px;
+    outline: none;
 }
 
-.botao2 {
-
-    padding: 8px;
-    transition: 500ms;
+.login-user button {
+    border: solid 1px rgba(0, 0, 0, 0);
+    border-radius: 30px;
+    background-color: rgb(255, 166, 0);
+    font-size: 14px;
+    padding: 22px;
 }
 
-.botao2:hover {
-
-    padding: 8px;
-    font-size: 22px;
-    background-color: color(from color srgb r g b);
-    transition: 500ms;
+.login-user button:hover {
+    background-color: rgba(255, 255, 255, 0.667);
 }
 
-.botao3 {
 
-    padding: 8px;
-    transition: 500ms;
-}
-    
-    .botao3:hover {
 
-    padding: 8px;
-    font-size: 22px;
-    border-radius: 3px;
-    transition: 500ms;
-}
+
+
+
+
