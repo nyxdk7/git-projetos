@@ -1,0 +1,74 @@
+.bem-vindo {
+
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(128, 128, 128, 0.397);
+    padding: 18px;
+    border-radius: 8px;
+    text-align: center;
+     margin: 20px;
+     height: 20vh;
+    
+    
+    display: flex;
+    align-items: center;
+    
+}
+
+.navegacao {
+
+    background-color: gray;
+    padding: 18px;
+    color: rgb(0, 0, 0);
+    border-radius: 6px;
+
+
+}
+
+.navegacao a {
+
+    text-decoration: none;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.botao1 {
+
+    padding: 8px;
+    transition: 500ms;
+}
+
+.botao1:hover {
+
+    padding: 8px;
+    font-size: 22px;
+    background-color: color(from color srgb r g b);
+    transition: 500ms;
+}
+
+.botao2 {
+
+    padding: 8px;
+    transition: 500ms;
+}
+
+.botao2:hover {
+
+    padding: 8px;
+    font-size: 22px;
+    background-color: color(from color srgb r g b);
+    transition: 500ms;
+}
+
+.botao3 {
+
+    padding: 8px;
+    transition: 500ms;
+}
+    
+    .botao3:hover {
+
+    padding: 8px;
+    font-size: 22px;
+    border-radius: 3px;
+    transition: 500ms;
+}
