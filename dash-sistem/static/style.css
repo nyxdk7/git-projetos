@@ -51,13 +51,16 @@ body {
 .login-user button {
     border: solid 1px rgba(0, 0, 0, 0);
     border-radius: 30px;
-    background-color: rgb(255, 166, 0);
+    background-color: rgba(255, 166, 0, 0.348);
     font-size: 14px;
     padding: 22px;
+    transition: 300ms;
 }
 
 .login-user button:hover {
     background-color: rgba(255, 255, 255, 0.667);
+    transition: 300ms;
+    font-size: 17px;
 }
 
 /*BARRA DE NAVEGACAO 👇*/ 
