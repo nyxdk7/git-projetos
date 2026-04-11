@@ -6,12 +6,12 @@ app = Flask(__name__)
 app.secret_key = 'segredo123'
 
 # CONFIG DO BANCO
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://joao:1A2b3c4d.@34.39.230.118:5432/diario_obra'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 import urllib.parse
 
 senha = urllib.parse.quote_plus("1A2b3c4d.")
+
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://joao:{senha}@34.39.230.118:5432/diario_obra'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
