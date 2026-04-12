@@ -50,6 +50,7 @@ def login():
     user = Usuario.query.filter_by(username=username).first()
 
     print("usuário encontrado:", user.username if user else None)
+    print("senha do banco:", user.senha if user else None)
 
     if user and user.senha == password:
         session['user'] = user.username
