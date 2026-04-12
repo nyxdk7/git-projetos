@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 import urllib.parse
 
 app = Flask(__name__)
@@ -47,7 +48,7 @@ def login():
 
     user = Usuario.query.filter_by(username=username).first()
 
-    if user and user.senha == password:
+    if user and check_password_hash(user.senha, password):
         session['user'] = user.username
         return redirect(url_for('dashboard'))
     else:
@@ -84,7 +85,7 @@ def cadastro():
 
         novo_usuario = Usuario(
             username=username,
-            senha=password,
+            senha=generate_password_hash(password),
             nivel='engenheiro'
         )
 
