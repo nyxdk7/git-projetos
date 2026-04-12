@@ -19,7 +19,7 @@ db = SQLAlchemy(app)
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
-    senha = db.Column(db.String(200), nullable=False)
+    senha = db.Column(db.String(255), nullable=False)
 
 # CRIAR TABELAS
 with app.app_context():
@@ -41,16 +41,21 @@ def home():
 
 @app.route('/login', methods=['POST'])
 def login():
-    username = request.form['username']
-    password = request.form['password']
+    username = request.form.get('username', '').strip().lower()
+    password = request.form.get('password', '').strip()
+
+    print("Username recebido:", repr(username))
+    print("Banco conectado:", app.config['SQLALCHEMY_DATABASE_URI'])
 
     user = Usuario.query.filter_by(username=username).first()
+
+    print("Usuário encontrado:", user.username if user else None)
 
     if user and user.senha == password:
         session['user'] = user.username
         return redirect(url_for('dashboard'))
     else:
-        return "Login inválido"
+        return "Login inválido", 401
 
 @app.route('/dashboard')
 @login_required
