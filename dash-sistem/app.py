@@ -19,7 +19,8 @@ db = SQLAlchemy(app)
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
-    senha = db.Column(db.String(200), nullable=False)
+    senha = db.Column(db.String(255), nullable=False)
+    nivel = db.Column(db.String(20), nullable=False, default='engenheiro')
 
 # CRIAR TABELAS
 with app.app_context():
@@ -67,6 +68,32 @@ def contratos():
 def logout():
     session.pop('user', None)
     return redirect(url_for('home'))
+
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastro():
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '').strip()
+
+        if not username or not password:
+            return "Preencha todos os campos"
+
+        usuario_existente = Usuario.query.filter_by(username=username).first()
+        if usuario_existente:
+            return "Usuário já existe"
+
+        novo_usuario = Usuario(
+            username=username,
+            senha=password,
+            nivel='engenheiro'
+        )
+
+        db.session.add(novo_usuario)
+        db.session.commit()
+
+        return redirect(url_for('home'))
+
+    return render_template('cadastro.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
