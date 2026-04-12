@@ -41,21 +41,21 @@ def home():
 
 @app.route('/login', methods=['POST'])
 def login():
-    username = request.form.get('username', '').strip().lower()
+    username = request.form.get('username', '').strip()
     password = request.form.get('password', '').strip()
 
-    print("Username recebido:", repr(username))
-    print("Banco conectado:", app.config['SQLALCHEMY_DATABASE_URI'])
+    print("username recebido:", repr(username))
+    print("password recebida:", repr(password))
 
     user = Usuario.query.filter_by(username=username).first()
 
-    print("Usuário encontrado:", user.username if user else None)
+    print("usuário encontrado:", user.username if user else None)
 
     if user and user.senha == password:
         session['user'] = user.username
         return redirect(url_for('dashboard'))
     else:
-        return "Login inválido", 401
+        return "Login inválido"
 
 @app.route('/dashboard')
 @login_required
