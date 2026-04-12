@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
+import urllib.parse
 
 app = Flask(__name__)
 app.secret_key = 'segredo123'
@@ -15,11 +16,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-# MODEL
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
-    senha = db.Column(db.String(255), nullable=False)
+    senha = db.Column(db.String(200), nullable=False)
 
 # CRIAR TABELAS
 with app.app_context():
@@ -44,13 +44,7 @@ def login():
     username = request.form.get('username', '').strip()
     password = request.form.get('password', '').strip()
 
-    print("username recebido:", repr(username))
-    print("password recebida:", repr(password))
-
     user = Usuario.query.filter_by(username=username).first()
-
-    print("usuário encontrado:", user.username if user else None)
-    print("senha do banco:", user.senha if user else None)
 
     if user and user.senha == password:
         session['user'] = user.username
