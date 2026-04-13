@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin</title>
+    <title>Painel Admin</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -17,22 +17,54 @@
     <div class="inicio-login">
         <h1>Painel do Administrador</h1>
 
-        <h2>Obras</h2>
-        <ul>
+        <h2>Resumo</h2>
+        <p>Total de usuários: {{ usuarios|length }}</p>
+        <p>Total de obras: {{ obras|length }}</p>
+
+        <hr>
+
+        <h2>Obras cadastradas</h2>
+        <a href="{{ url_for('nova_obra') }}">Cadastrar nova obra</a>
+
+        <table style="margin: auto; color: white; margin-top: 20px;">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Lote</th>
+                <th>Ações</th>
+            </tr>
+
             {% for obra in obras %}
-                <li>{{ obra.nome }} - Lote {{ obra.lote }}</li>
+            <tr>
+                <td>{{ obra.id }}</td>
+                <td>{{ obra.nome }}</td>
+                <td>{{ obra.lote }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('excluir_obra', obra_id=obra.id) }}" style="display:inline;">
+                        <button type="submit">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">Nenhuma obra cadastrada.</td>
+            </tr>
             {% endfor %}
-        </ul>
+        </table>
 
-        <h2>Usuários</h2>
+        <hr>
 
-        <table style="margin: auto; color: white;">
+        <h2>Usuários cadastrados</h2>
+
+        <table style="margin: auto; color: white; margin-top: 20px;">
             <tr>
                 <th>ID</th>
                 <th>Usuário</th>
                 <th>Nível</th>
-                <th>Obra</th>
-                <th>Vincular</th>
+                <th>Obra atual</th>
+                <th>Vincular obra</th>
+                <th>Alterar nível</th>
+                <th>Excluir</th>
             </tr>
 
             {% for usuario in usuarios %}
@@ -40,35 +72,43 @@
                 <td>{{ usuario.id }}</td>
                 <td>{{ usuario.username }}</td>
                 <td>{{ usuario.nivel }}</td>
-
                 <td>
                     {% if usuario.obra %}
-                        {{ usuario.obra.nome }}
+                        {{ usuario.obra.nome }} {% if usuario.obra.lote %}- Lote {{ usuario.obra.lote }}{% endif %}
                     {% else %}
                         Sem obra
                     {% endif %}
                 </td>
-
                 <td>
                     <form method="POST" action="{{ url_for('vincular_obra', user_id=usuario.id) }}">
                         <select name="obra_id">
                             <option value="">Sem obra</option>
                             {% for obra in obras %}
-                                <option value="{{ obra.id }}"
-                                    {% if usuario.obra_id == obra.id %}selected{% endif %}>
-                                    {{ obra.nome }}
+                                <option value="{{ obra.id }}" {% if usuario.obra_id == obra.id %}selected{% endif %}>
+                                    {{ obra.nome }} {% if obra.lote %}- Lote {{ obra.lote }}{% endif %}
                                 </option>
                             {% endfor %}
                         </select>
                         <button type="submit">Salvar</button>
                     </form>
                 </td>
+                <td>
+                    <form method="POST" action="{{ url_for('alterar_nivel', user_id=usuario.id) }}">
+                        <select name="nivel">
+                            <option value="engenheiro" {% if usuario.nivel == 'engenheiro' %}selected{% endif %}>Engenheiro</option>
+                            <option value="admin" {% if usuario.nivel == 'admin' %}selected{% endif %}>Admin</option>
+                        </select>
+                        <button type="submit">Alterar</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" action="{{ url_for('excluir_usuario', user_id=usuario.id) }}">
+                        <button type="submit">Excluir</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </table>
-
-        <br>
-        <a href="{{ url_for('nova_obra') }}">Cadastrar nova obra</a>
     </div>
 
 </body>

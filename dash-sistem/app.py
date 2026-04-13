@@ -166,6 +166,48 @@ def vincular_obra(user_id):
     db.session.commit()
     return redirect(url_for('admin'))
 
+@app.route('/admin/alterar-nivel/<int:user_id>', methods=['POST'])
+@login_required
+@nivel_required('admin')
+def alterar_nivel(user_id):
+    usuario = Usuario.query.get_or_404(user_id)
+    novo_nivel = request.form.get('nivel')
+
+    if novo_nivel not in ['admin', 'engenheiro']:
+        return "Nível inválido", 400
+
+    usuario.nivel = novo_nivel
+    db.session.commit()
+
+    return redirect(url_for('admin'))
+
+@app.route('/admin/excluir-usuario/<int:user_id>', methods=['POST'])
+@login_required
+@nivel_required('admin')
+def excluir_usuario(user_id):
+    usuario = Usuario.query.get_or_404(user_id)
+
+    if usuario.username == session.get('user'):
+        return "Você não pode excluir seu próprio usuário"
+
+    db.session.delete(usuario)
+    db.session.commit()
+
+    return redirect(url_for('admin'))
+
+@app.route('/admin/excluir-obra/<int:obra_id>', methods=['POST'])
+@login_required
+@nivel_required('admin')
+def excluir_obra(obra_id):
+    obra = Obra.query.get_or_404(obra_id)
+
+    for usuario in obra.usuarios:
+        usuario.obra_id = None
+
+    db.session.delete(obra)
+    db.session.commit()
+
+    return redirect(url_for('admin'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
