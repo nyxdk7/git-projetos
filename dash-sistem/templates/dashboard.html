@@ -1,41 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>Admin</title>
+    <link rel="stylesheet" href="/static/style2.css">
 </head>
 <body>
-    <h1>Dashboard</h1>
 
-    <p>Usuário logado: {{ session['user'] }}</p>
-    <p>Nível: {{ session['nivel'] }}</p>
+    <div class="navegacao">
+        <nav>
+            <a href="{{ url_for('dashboard') }}">DASHBOARD</a>
+            <a href="{{ url_for('admin') }}">ADMIN</a>
+            <a href="{{ url_for('logout') }}">SAIR</a>
+        </nav>
+    </div>
 
-    {% if admin %}
-        <h2>Todas as obras</h2>
+    <div class="inicio-login">
+        <h1>PAINEL DO ADMINISTRADOR</h1>
+
+        <h2>OBRAS / LOTES</h2>
         <ul>
             {% for obra in obras %}
-                <li>
-                    {{ obra.nome }} {% if obra.lote %}- Lote {{ obra.lote }}{% endif %}
-                </li>
-            {% else %}
-                <li>Nenhuma obra cadastrada.</li>
+                <li>{{ obra.nome }} - Lote {{ obra.lote }}</li>
             {% endfor %}
         </ul>
 
-        <a href="{{ url_for('admin') }}">Ir para painel admin</a>
-    {% else %}
-        <h2>Sua obra</h2>
+        <h2>Usuários</h2>
 
-        {% if obra %}
-            <p><strong>Nome:</strong> {{ obra.nome }}</p>
-            <p><strong>Lote:</strong> {{ obra.lote }}</p>
-        {% else %}
-            <p>Você ainda não está vinculado a nenhuma obra.</p>
-        {% endif %}
-    {% endif %}
+        <table style="margin: auto; color: white;">
+            <tr>
+                <th>ID</th>
+                <th>Usuário</th>
+                <th>Nível</th>
+                <th>Obra</th>
+                <th>Vincular</th>
+            </tr>
 
-    <br>
-    <a href="{{ url_for('contratos') }}">Contratos</a>
-    <br><br>
-    <a href="{{ url_for('logout') }}">Sair</a>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.nivel }}</td>
+
+                <td>
+                    {% if usuario.obra %}
+                        {{ usuario.obra.nome }}
+                    {% else %}
+                        Sem obra
+                    {% endif %}
+                </td>
+
+                <td>
+                    <form method="POST" action="{{ url_for('vincular_obra', user_id=usuario.id) }}">
+                        <select name="obra_id">
+                            <option value="">Sem obra</option>
+                            {% for obra in obras %}
+                                <option value="{{ obra.id }}"
+                                    {% if usuario.obra_id == obra.id %}selected{% endif %}>
+                                    {{ obra.nome }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit">Salvar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+        <a href="{{ url_for('nova_obra') }}">Cadastrar nova obra</a>
+    </div>
+
 </body>
 </html>

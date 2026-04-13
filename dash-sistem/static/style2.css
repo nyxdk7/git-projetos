@@ -21,7 +21,7 @@ body {
 
     text-decoration: none;
     font-family: sans-serif;
-    font-size: 24px;
+    font-size: 15px;
     color: white;
     margin-left: 20px;
     transition: 500ms;
@@ -29,7 +29,7 @@ body {
 
 .navegacao a:hover {
 
-    font-size: 32px;
+    font-size: 20px;
     transition: 500ms;
 }
 
@@ -41,5 +41,16 @@ body {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.415);
     padding:60px;
+}
+
+table {
+    background-color: rgba(0, 0, 0, 0.29);
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid white;
 }
 
