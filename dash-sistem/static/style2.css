@@ -43,6 +43,20 @@ body {
     padding:60px;
 }
 
+.inicio-login a {
+
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    transition: 500ms;
+}
+
+.inicio-login a:hover {
+    transition: 500ms;
+    font-size: 22px;
+    color: rgb(0, 170, 255);
+}
+
 table {
     background-color: rgba(0, 0, 0, 0.29);
     border-collapse: collapse;
@@ -52,5 +66,32 @@ th, td {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid white;
+}
+
+.tabela-admin thead {
+    background-color: rgba(255, 166, 0, 0 0.85);
+    color: white;
+}
+
+.tabela-admin th,
+.tabela-admin td {
+    padding: 14px 18px;
+    text-align: center;
+
+}
+
+.tabela-admin tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: 0.3s;
+}
+
+.tabela-admin tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.01);
+}
+
+.tabela-admin th {
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
